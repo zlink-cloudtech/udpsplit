@@ -1,0 +1,22 @@
+{"type":"entity","name":"udpsplit","entityType":"project","observations":["UDP分发工具，实现UDP数据的高效传输和分发","包含client和server两个主要组件","支持多会话代理和目标地址转发功能","已实现基础client/server模式，支持UDP传输","添加多会话代理支持，server监听端口范围8000-8005","实现目标地址转发，server转发到127.0.0.1:9000","添加流轮询机制，client监听7000端口，收到数据发送到所有server端口","实现源端口区分，server使用9000+端口转发","支持命令行参数配置所有必要选项"]}
+{"type":"entity","name":"client","entityType":"component","observations":["client模式，接收数据并创建stream","将数据轮询到多个代理会话中发送到server"]}
+{"type":"entity","name":"server","entityType":"component","observations":["server模式，从代理会话接收数据","根据target配置转发数据到目标地址","为不同stream使用不同源端口发送到target"]}
+{"type":"entity","name":"Go","entityType":"technology","observations":["项目使用Go编程语言实现"]}
+{"type":"entity","name":"UDP","entityType":"protocol","observations":["client和server之间使用UDP传输数据"]}
+{"type":"entity","name":"多会话代理","entityType":"feature","observations":["server配置端口范围，client需要与之一致","client和server建立的UDP session存在多个代理会话"]}
+{"type":"entity","name":"目标地址转发","entityType":"feature","observations":["server有target配置，表示server收到数据后需要转发的目标地址"]}
+{"type":"entity","name":"流轮询","entityType":"feature","observations":["client接收数据时创建stream，并把数据轮询到多个代理会话中"]}
+{"type":"entity","name":"源端口区分","entityType":"feature","observations":["server转发数据时，如果是不同的stream使用不同源端口发送到target"]}
+{"type":"entity","name":"命令行参数配置","entityType":"feature","observations":["支持简单的命令行参数配置client和server的相关参数"]}
+{"type":"entity","name":"amd64 Linux","entityType":"platform","observations":["仅需要支持amd64架构的Linux系统"]}
+{"type":"relation","from":"udpsplit","to":"Go","relationType":"uses"}
+{"type":"relation","from":"udpsplit","to":"client","relationType":"contains"}
+{"type":"relation","from":"udpsplit","to":"server","relationType":"contains"}
+{"type":"relation","from":"client","to":"UDP","relationType":"uses"}
+{"type":"relation","from":"server","to":"UDP","relationType":"uses"}
+{"type":"relation","from":"udpsplit","to":"多会话代理","relationType":"supports"}
+{"type":"relation","from":"udpsplit","to":"目标地址转发","relationType":"supports"}
+{"type":"relation","from":"client","to":"流轮询","relationType":"implements"}
+{"type":"relation","from":"server","to":"源端口区分","relationType":"implements"}
+{"type":"relation","from":"udpsplit","to":"命令行参数配置","relationType":"supports"}
+{"type":"relation","from":"udpsplit","to":"amd64 Linux","relationType":"supports"}
